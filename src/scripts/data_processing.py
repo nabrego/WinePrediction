@@ -22,6 +22,7 @@ def load_and_preprocess_data(file_path, test_size=0.2, random_state=42):
     quaity_mapping = { 3 : "Low",4 : "Low",5: "Medium",6 : "Medium",7: "Medium",8 : "High",9 : "High"}
     df["quality"] =  df["quality"].map(quaity_mapping)
 
+    # feature selection: drop the density columns
     X = df.drop(['type', 'density','quality'], axis=1)
     y = df['quality']
 
