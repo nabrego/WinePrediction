@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-def load_and_preprocess_data(file_path, features_to_drop=None, test_size=0.2, random_state=42):
+def load_and_preprocess_data(file_path, features_to_drop=None, map_quality=False, test_size=0.2, random_state=42):
     """
     Preprocess the dataset with configurable feature dropping.
 
@@ -21,7 +21,8 @@ def load_and_preprocess_data(file_path, features_to_drop=None, test_size=0.2, ra
     # Mapping the quality to low, medium and high
     quality_mapping = {3: "Low", 4: "Low", 5: "Medium", 
                       6: "Medium", 7: "Medium", 8: "High", 9: "High"}
-    df["quality"] = df["quality"].map(quality_mapping)
+    if map_quality:
+        df["quality"] = df["quality"].map(quality_mapping)
 
     # Always drop 'type' and 'quality', then drop additional features if specified
     features_to_drop = features_to_drop or []
