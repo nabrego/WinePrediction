@@ -16,6 +16,32 @@ function App() {
   });
   const [prediction, setPrediction] = useState(null);
 
+  const units = {
+    fixedAcidity: 'g(tartaric acid)/dm3',
+    volatileAcidity: 'g(acetic acid)/dm3',
+    citricAcid: 'g/dm3',
+    residualSugar: 'g/dm3',
+    chlorides: 'g(sodium chloride)/dm3',
+    freeSulfurDioxide: 'mg/dm3',
+    totalSulfurDioxide: 'mg/dm3',
+    pH: '',
+    sulphates: 'g(potassium sulphate)/dm3',
+    alcohol: '% vol.',
+  };
+
+  const displayNames = {
+    fixedAcidity: 'Fixed Acidity',
+    volatileAcidity: 'Volatile Acidity',
+    citricAcid: 'Citric Acid',
+    residualSugar: 'Residual Sugar',
+    chlorides: 'Chlorides',
+    freeSulfurDioxide: 'Free Sulfur Dioxide',
+    totalSulfurDioxide: 'Total Sulfur Dioxide',
+    pH: 'pH',
+    sulphates: 'Sulphates',
+    alcohol: 'Alcohol'
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -39,7 +65,7 @@ function App() {
             {Object.keys(formData).map((key) => (
               <div key={key}>
                 <label className="block text-sm font-medium text-gray-700">
-                  {key}
+                  {displayNames[key]} {units[key] && `(${units[key]})`}
                 </label>
                 <input
                   type="number"
